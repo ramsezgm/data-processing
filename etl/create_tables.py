@@ -1,15 +1,16 @@
 import pymysql
 from pymysql.err import Error
+from decouple import config
 
 def create_database_and_tables():
     connection = None
     try:
         # Conexión a MySQL
         connection = pymysql.connect(
-            host='localhost',
-            user='root',
-            password='Ramses27311914', 
-            port=3306
+            host=config('DB_HOST'),
+            user=config('DB_USER'),
+            password=config('DB_PASSWORD'),
+            port=config('DB_PORT', cast=int)
         )
 
         # Verificar conexión

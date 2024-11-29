@@ -1,15 +1,16 @@
 import pymysql
 import pandas as pd
+from decouple import config
 
 def process_and_insert_data(csv_file):
     try:
         # Conexión a la base de datos
         connection = pymysql.connect(
-            host='localhost',
-            user='root',
-            password='Ramses27311914',
-            database='sales',
-            port=3306
+            host=config('DB_HOST'),
+            user=config('DB_USER'),
+            password=config('DB_PASSWORD'),
+            database=config('DB_NAME', default=None),
+            port=config('DB_PORT', cast=int)
         )
 
         cursor = connection.cursor()
